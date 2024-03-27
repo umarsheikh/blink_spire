@@ -9,7 +9,7 @@ class Post(models.Model):
     summary = models.CharField(max_length=255)
     content = models.TextField()
     published = models.BooleanField(default=False)
-    published_at = models.DateTimeField(null=True, blank=True)
+    published_at = models.DateTimeField(null=True, blank=True, validators=[DateTimeValidator(future=True)])
 
     parent_post = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_posts')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
